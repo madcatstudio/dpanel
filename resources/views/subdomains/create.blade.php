@@ -20,7 +20,7 @@
                            name="name" value="{{ old('name') }}"
                            aria-describedby="helpBlockName"
                            required autofocus>
-                    <span class="input-group-addon" id="helpBlockName">{{ '@'.$domain->name }}</span>
+                    <span class="input-group-addon" id="helpBlockName">.{{ $domain->name }}</span>
                 </div>
 
                 @if ($errors->has('name'))
