@@ -7,7 +7,7 @@
         <div class="panel panel-default">
 
             <ul class="list-group">
-                @foreach( $domains as $letter => $domainCollection)
+                @forelse( $domains as $letter => $domainCollection)
                     <li class="list-group-item letter">
                         <h4>{{ $letter }}</h4>
                     </li>
@@ -17,7 +17,11 @@
                             <a href="{{ url('/domains/'.$domain->id) }}">{{ $domain->name }}</a>
                         </li>
                     @endforeach
-                @endforeach
+                @empty
+                    <li class="list-group-item">
+                        No domains in database
+                    </li>
+                @endforelse
             </ul>
         </div>
     </div>
