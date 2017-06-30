@@ -14,11 +14,14 @@
             <div class="col-md-12 form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label class="control-label" for="name">Name *</label>
 
-                <input id="name" type="text" placeholder="subdomain name"
-                       class="form-control"
-                       name="name" value="{{ old('name') }}"
-                       aria-describedby="helpBlockName"
-                       required autofocus>
+                <div class="input-group">
+                    <input id="name" type="text" placeholder="subdomain"
+                           class="form-control"
+                           name="name" value="{{ old('name') }}"
+                           aria-describedby="helpBlockName"
+                           required autofocus>
+                    <span class="input-group-addon" id="helpBlockName">{{ '@'.$domain->name }}</span>
+                </div>
 
                 @if ($errors->has('name'))
                     <span id="helpBlockName" class="help-block">{{ $errors->first('name') }}</span>
