@@ -1,32 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="hero is-primary is-bold">
-        <div class="container">
-            <div class="hero-body">
-                <h1 class="title">Hostings</h1>
-                <p class="subtitle">All your hostings.</p>
-            </div>
-        </div>
-    </section>
+    <h1>Hostings</h1>
+    <hr>
+    <div class="row">
+        <div class="panel panel-default">
 
-    <section class="section">
-        <div class="container">
-            <ul class="has-columns has-text-centered">
+            <ul class="list-group">
                 @foreach( $hostings as $letter => $hostingCollection)
-                    <div class="letter-group">
-                        <h3 class="title is-1 letter">{{ $letter }}</h3>
+                    <li class="list-group-item letter">
+                        <h4>{{ $letter }}</h4>
+                    </li>
 
-                        <ul>
-                            @foreach($hostingCollection as $hosting)
-                                <li class="title is-5">
-                                    <a href="{{ url('/hostings/'.$hosting->id) }}">{{ $hosting->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @foreach($hostingCollection as $hosting)
+                        <li class="list-group-item">
+                            <a href="{{ url('/hostings/'.$hosting->id) }}">{{ $hosting->name }}</a>
+                        </li>
+                    @endforeach
                 @endforeach
             </ul>
         </div>
-    </section>
+    </div>
 @endsection

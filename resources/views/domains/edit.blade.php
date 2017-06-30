@@ -1,91 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="hero is-primary is-bold">
-        <div class="container">
-            <div class="hero-body">
-                <h1 class="title">{{ $domain->name }}</h1>
-                <p class="subtitle">edit domain</p>
+    <h1>Edit domain</h1>
+    <hr>
+
+    <form method="POST" action="/domains/{{ $domain->id }}">
+        {{ csrf_field() }}
+        {{ method_field('patch') }}
+
+        <div class="row">
+            <div class="col-md-4 form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                <label class="control-label" for="name">Name *</label>
+
+                <input id="name" type="text" placeholder="example.com"
+                       class="form-control"
+                       name="name" value="{{ $domain->name }}"
+                       aria-describedby="helpBlockName"
+                       required autofocus>
+
+                @if ($errors->has('name'))
+                    <span id="helpBlockName" class="help-block">{{ $errors->first('name') }}</span>
+                @endif
+            </div>
+
+            <div class="col-md-4 form-group{{ $errors->has('registration_date') ? ' has-error' : '' }}">
+                <label class="control-label" for="registration_date">Registration date *</label>
+
+                <input id="registration_date" type="date"
+                       class="form-control"
+                       name="registration_date" value="{{ $domain->registration_date->format('Y-m-d') }}"
+                       aria-describedby="helpBlockRegistrationDate"
+                       required>
+
+                @if ($errors->has('registration_date'))
+                    <span id="helpBlockRegistrationDate"
+                          class="help-block">{{ $errors->first('registration_date') }}</span>
+                @endif
+            </div>
+
+            <div class="col-md-4 form-group{{ $errors->has('ip') ? ' has-error' : '' }}">
+                <label class="control-label" for="ip">IP Address *</label>
+
+                <input id="ip" type="text" placeholder="192.168.0.1"
+                       class="form-control"
+                       name="ip" value="{{ $domain->ip }}"
+                       aria-describedby="helpBlockIp"
+                       required>
+
+                @if ($errors->has('ip'))
+                    <span id="helpBlockIp" class="help-block">{{ $errors->first('ip') }}</span>
+                @endif
             </div>
         </div>
-    </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-4 is-offset-4">
-
-                    <form method="POST" action="/domains/{{ $domain->id }}">
-                        {{ csrf_field() }}
-                        {{ method_field('patch') }}
-
-                        <div class="field">
-                            <label for="name" class="label">Name</label>
-
-                            <p class="control has-icons-right">
-                                <input id="name" type="text" placeholder="example.com"
-                                       class="input{{ $errors->has('name') ? ' is-danger' : '' }}"
-                                       name="name" value="{{ $domain->name }}" required autofocus>
-                                @if ($errors->has('name'))
-                                    <span class="icon is-small is-right">
-                                        <i class="fa fa-warning"></i>
-                                    </span>
-                                @endif
-                            </p>
-                            @if ($errors->has('name'))
-                                <p class="help is-danger">{{ $errors->first('name') }}</p>
-                            @endif
-                        </div>
-
-                        <div class="field">
-                            <label for="registration_date" class="label">Registration date</label>
-
-                            <p class="control has-icons-right">
-                                <input id="registration_date" type="date"
-                                       class="input{{ $errors->has('registration_date') ? ' is-danger' : '' }}"
-                                       name="registration_date" value="{{ $domain->registration_date }}" required>
-                                @if ($errors->has('registration_date'))
-                                    <span class="icon is-small is-right">
-                                        <i class="fa fa-warning"></i>
-                                    </span>
-                                @endif
-                            </p>
-                            @if ($errors->has('registration_date'))
-                                <p class="help is-danger">{{ $errors->first('registration_date') }}</p>
-                            @endif
-                        </div>
-
-                        <div class="field">
-                            <label for="ip" class="label">IP Address</label>
-
-                            <p class="control has-icons-right">
-                                <input id="ip" type="text" placeholder="192.168.0.1"
-                                       class="input{{ $errors->has('ip') ? ' is-danger' : '' }}"
-                                       name="ip" value="{{ $domain->ip }}" required>
-                                @if ($errors->has('ip'))
-                                    <span class="icon is-small is-right">
-                                        <i class="fa fa-warning"></i>
-                                    </span>
-                                @endif
-                            </p>
-                            @if ($errors->has('ip'))
-                                <p class="help is-danger">{{ $errors->first('ip') }}</p>
-                            @endif
-                        </div>
-
-                        <div class="field is-grouped">
-                            <p class="control">
-                                <button type="submit" class="button is-primary">Update</button>
-                            </p>
-                            <p class="control">
-                                <a class="button is-link" href="{{ URL::previous() }}">Cancel</a>
-                            </p>
-                        </div>
-
-                    </form>
-
-                </div>
-            </div>
+        <div class="btn-group-lg">
+            <button class="btn btn-success"type="submit" >Update</button>
+            <a class="btn btn-link" href="{{ URL::previous() }}">Cancel</a>
         </div>
-    </section>
+
+    </form>
 @endsection

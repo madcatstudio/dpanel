@@ -1,32 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="hero is-primary is-bold">
-        <div class="container">
-            <div class="hero-body">
-                <h1 class="title">Maintainers</h1>
-                <p class="subtitle">All your maintainers.</p>
-            </div>
-        </div>
-    </section>
+    <h1>Maintainers</h1>
+    <hr>
+    <div class="row">
+        <div class="panel panel-default">
 
-    <section class="section">
-        <div class="container">
-            <ul class="has-columns has-text-centered">
+            <ul class="list-group">
                 @foreach( $maintainers as $letter => $maintainerCollection)
-                    <div class="letter-group">
-                        <h3 class="title is-1 letter">{{ $letter }}</h3>
+                    <li class="list-group-item letter">
+                        <h4>{{ $letter }}</h4>
+                    </li>
 
-                        <ul>
-                            @foreach($maintainerCollection as $maintainer)
-                                <li class="title is-5">
-                                    <a href="{{ url('/maintainers/'.$maintainer->id) }}">{{ $maintainer->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @foreach($maintainerCollection as $maintainer)
+                        <li class="list-group-item">
+                            <a href="{{ url('/maintainers/'.$maintainer->id) }}">{{ $maintainer->name }}</a>
+                        </li>
+                    @endforeach
                 @endforeach
             </ul>
         </div>
-    </section>
+    </div>
 @endsection

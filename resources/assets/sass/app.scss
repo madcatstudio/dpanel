@@ -24,7 +24,7 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 120px;
-  background-color: #f5f5f5;
+  background-color: #3a3a3a;
 }
 
 body > #app > .container {
@@ -39,47 +39,31 @@ body > #app > .container {
   padding-left: 15px;
 }
 
-.has-columns {
-  column-count: 3;
-  column-rule: 1px solid #e3e3e3;
-  column-gap: 70px;
-  //+mobile
-  //column-count: 1;
-}
-
-.letter-group {
-  margin: 2em 0 4em 0;
-  break-inside: avoid;
-}
-.letter-group:first-child {
-  margin-top: 0;
-}
-.letter-group:last-child {
-  margin-bottom: 0;
-}
-
-.letter-group .letter {
-  background: $brand-primary;
-  color: lighten($brand-primary, 60%);
+.letter {
+  background: lighten($brand-primary, 20%);
+  color: lighten($brand-primary, 70%);
   text-transform: uppercase;
-  padding: 10px 0;
 }
+//
+//.navbar-default .navbar-nav > li > a {
+//  color: #fff;
+//}
+//.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+//  color: lighten($brand-primary, 20%);
+//}
+//
+//.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+//  color: lighten($brand-primary, 20%);
+//}
+//
+//.navbar-default .navbar-brand{
+//  color: #fff;
+//}
+//
+//.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+//  color: lighten($brand-primary, 20%);
+//}
 
-.navbar-default .navbar-nav > li > a {
-  color: #fff;
-}
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
-  color: lighten($brand-primary, 20%);
-}
-
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
-  color: lighten($brand-primary, 20%);
-}
-
-.navbar-default .navbar-brand{
-  color: #fff;
-}
-
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
-  color: lighten($brand-primary, 20%);
+.btn-circle {
+  border-radius: 999px !important;
 }

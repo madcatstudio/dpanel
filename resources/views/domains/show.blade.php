@@ -1,24 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">{{ $domain->name }}</h1>
+    <h1>{{ $domain->name }}</h1>
     <hr>
     <div class="row">
         <div class="col-md-4">
-            <p>Register date: {{ $domain->formattedRegistrationDate }}</p>
-            <p>IP: {{ $domain->ip }}</p>
 
-            <a class="btn btn-primary" href="/domains/{{ $domain->id }}/edit">Edit domain</a>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Domain information</h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Register date <code>{{ $domain->formattedRegistrationDate }}</code>
+                    </li>
+                    <li class="list-group-item">
+                        IP <code>{{ $domain->ip }}</code>
+                    </li>
+                </ul>
+                <div class="panel-footer clearfix">
+                    <div class="pull-right">
+                        <div class="btn-group-sm">
+                            <a class="btn btn-default btn-circle" href="/domains/{{ $domain->id }}/edit" title="Edit domain"><span class="glyphicon glyphicon-pencil"></span></a>
 
-            <a class="btn btn-danger" href="/domains/{{ $domain->id }}"
-               onclick="event.preventDefault(); del('delete-domain')">Delete domain</a>
-            <form id="delete-domain"
-                  method="POST"
-                  action="/domains/{{ $domain->id }}"
-                  style="display: none;">
-                {{ csrf_field() }}
-                {{ method_field('delete') }}
-            </form>
+                            <a class="btn btn-danger btn-circle" href="/domains/{{ $domain->id }}"
+                               onclick="event.preventDefault(); del('delete-domain')" title="Delete domain"><span class="glyphicon glyphicon-remove"></span></a>
+                            <form id="delete-domain"
+                                  method="POST"
+                                  action="/domains/{{ $domain->id }}"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                                {{ method_field('delete') }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <hr>
 
@@ -28,25 +45,49 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Hosting</h3>
                     </div>
-                    <div class="panel-body">
-                        <a href="/hostings/{{ $domain->hosting->id }}"
-                           class="btn btn-default btn-sm">{{ $domain->hosting->name }}</a>
-                        <p>
-                            <strong>Url</strong> <code>{{ $domain->hosting->website }}</code> <a
-                                    href="{{ $domain->hosting->website }}" target="_blank" class="btn btn-default btn-xs"><span
-                                        class="glyphicon glyphicon-link"></span> open link</a><br>
-                            <strong>Username</strong> <code>{{ $domain->hosting->username }}</code><br>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <code>{{ $domain->hosting->name }}</code>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Url</strong> <code>{{ $domain->hosting->website }}</code>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Username</strong> <code>{{ $domain->hosting->username }}</code>
+                        </li>
+                        <li class="list-group-item">
                             <strong>Password</strong> <code>{{ $domain->hosting->password }}</code>
-                        </p>
-                        <hr>
-                        <form id="remove-hosting" method="POST" action="/domains/{{ $domain->id }}">
-                            {{ csrf_field() }}
-                            {{ method_field('patch') }}
-                            <input id="hosting_id" name="hosting_id" type="hidden" value="">
-                            <button type="submit" class="btn btn-warning btn-block">Remove</button>
-                        </form>
+                        </li>
+                    </ul>
+
+                    <div class="panel-footer clearfix">
+                        <div class="pull-right">
+                            <form id="remove-hosting" method="POST" action="/domains/{{ $domain->id }}">
+                                {{ csrf_field() }}
+                                {{ method_field('patch') }}
+                                <input id="hosting_id" name="hosting_id" type="hidden" value="">
+                            </form>
+                            <div class="btn-group-sm">
+                                <div class="btn-group dropup">
+                                    <button type="button" class="btn btn-sm btn-default btn-circle dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                                class="glyphicon glyphicon-link"></span> Open link <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/hostings/{{ $domain->hosting->id }}">Hosting details</a></li>
+                                        <li><a href="{{ $domain->hosting->website }}" target="_blank">Hosting provider
+                                                website</a></li>
+                                    </ul>
+                                </div>
+                                <button type="submit" form="remove-hosting" class="btn btn-default btn-circle"
+                                        title="Remove hosting"><span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             @else
                 <form id="add-hosting" method="POST" action="/domains/{{ $domain->id }}">
                     {{ csrf_field() }}
@@ -75,26 +116,47 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Maintainer</h3>
                     </div>
-                    <div class="panel-body">
-                        <strong>{{ $domain->maintainer->name }}
-                            <a href="/maintainers/{{ $domain->maintainer->id }}"><span
-                                        class="glyphicon glyphicon-share-alt"></span></a>
-                        </strong>
-                        <p><a href="{{ $domain->maintainer->website }}"
-                              target="_blank">{{ $domain->maintainer->website }}</a></p>
 
-                        <strong>Username</strong> <code>{{ $domain->maintainer->username }}</code><br>
-                        <strong>Password</strong> <code>{{ $domain->maintainer->password }}</code>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <code>{{ $domain->maintainer->name }}</code>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Url</strong> <code>{{ $domain->maintainer->website }}</code>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Username</strong> <code>{{ $domain->maintainer->username }}</code>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Password</strong> <code>{{ $domain->maintainer->password }}</code>
+                        </li>
+                    </ul>
 
-                        <hr>
-
-                        <form method="POST" action="/domains/{{ $domain->id }}">
-                            {{ csrf_field() }}
-                            {{ method_field('patch') }}
-                            <input id="maintainer_id" name="maintainer_id" type="hidden" value="">
-                            <button type="submit" class="btn btn-warning btn-block">Remove</button>
-                        </form>
-
+                    <div class="panel-footer clearfix">
+                        <div class="pull-right">
+                            <form id="remove-maintainer" method="POST" action="/domains/{{ $domain->id }}">
+                                {{ csrf_field() }}
+                                {{ method_field('patch') }}
+                                <input id="maintainer_id" name="maintainer_id" type="hidden" value="">
+                            </form>
+                            <div class="btn-group-sm">
+                                <div class="btn-group dropup">
+                                    <button type="button" class="btn btn-sm btn-default btn-circle dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                                class="glyphicon glyphicon-link"></span> Open link <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/maintainers/{{ $domain->maintainer->id }}">Maintainer details</a></li>
+                                        <li><a href="{{ $domain->maintainer->website }}" target="_blank">Maintainer
+                                                provider
+                                                website</a></li>
+                                    </ul>
+                                </div>
+                                <button type="submit" form="remove-maintainer" class="btn btn-default btn-circle"
+                                        title="Remove maintainer"><span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @else
@@ -118,6 +180,7 @@
                 </form>
             @endif
             <hr>
+
         </div>
 
         <div class="col-md-8">
@@ -133,36 +196,50 @@
                     </div>
                 </div>
 
-            @if($domain->subdomains->count() > 0)
-                <!-- List group -->
-                    <ul class="list-group">
+                @if($domain->subdomains->count() > 0)
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Url</th>
+                            <th>Edit</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
                         @foreach($domain->subdomains as $subdomain)
-                            <li class="list-group-item clearfix">
-                                <div class="pull-left">
-                                    {{ $subdomain->fullUrl }} <a
-                                            href="{{ $subdomain->fullUrl }}" target="_blank" class="btn btn-default btn-xs"><span
+                            <tr>
+                                <td>
+                                    <code>{{ $subdomain->fullUrl }}</code> <a
+                                            href="{{ $subdomain->fullUrl }}" target="_blank"
+                                            class="btn btn-default btn-xs btn-circle"><span
                                                 class="glyphicon glyphicon-link"></span> open link</a>
-                                </div>
-                                <div class="pull-right">
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-circle btn-xs"
+                                       href="/subdomains/{{ $subdomain->id }}/edit">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                                <td>
                                     <form id="delete-subdomain-{{ $subdomain->id }}" method="POST"
                                           action="/subdomains/{{ $subdomain->id }}">
                                         {{ csrf_field() }}
                                         {{ method_field('delete') }}
-                                        <div class="btn-group-xs">
-                                            <a class="btn btn-default"
-                                               href="/subdomains/{{ $subdomain->id }}/edit">
-                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                            </a>
-                                            <a class="btn btn-danger" href="/subdomains/{{ $subdomain->id }}"
-                                               onclick="event.preventDefault(); del('delete-subdomain-{{ $subdomain->id }}')">
-                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            </a>
-                                        </div>
+
+                                        <a class="btn btn-danger btn-circle btn-xs"
+                                           href="/subdomains/{{ $subdomain->id }}"
+                                           onclick="event.preventDefault(); del('delete-subdomain-{{ $subdomain->id }}')">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+
                                     </form>
-                                </div>
-                            </li>
+                                </td>
+                            </tr>
                         @endforeach
-                    </ul>
+
+                        </tbody>
+                    </table>
                 @endif
             </div>
 
@@ -185,7 +262,8 @@
                         <th>Name</th>
                         <th>Username</th>
                         <th>Password</th>
-                        <th>Action</th>
+                        <th>Edit</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -195,18 +273,22 @@
                             <td><code>{{ $database->username }}</code></td>
                             <td><code>{{ $database->password }}</code></td>
                             <td>
+                                <a class="btn btn-primary btn-circle btn-xs"
+                                   href="/databases/{{ $database->id }}/edit">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
                                 <form id="delete-database-{{ $database->id }}" method="POST"
                                       action="/databases/{{ $database->id }}">
                                     {{ csrf_field() }}
                                     {{ method_field('delete') }}
-                                    <div class="btn-group-sm">
-                                        <a class="btn btn-primary" href="/databases/{{ $database->id }}/edit">Edit</a>
-                                        <a class="btn btn-danger" href="/databases/{{ $database->id }}"
-                                           onclick="event.preventDefault();
-                                                   del('delete-database-{{ $database->id }}')">
-                                            Delete
-                                        </a>
-                                    </div>
+
+                                    <a class="btn btn-danger btn-circle btn-xs" href="/databases/{{ $database->id }}"
+                                       onclick="event.preventDefault(); del('delete-database-{{ $database->id }}')">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </a>
+
                                 </form>
                             </td>
                         </tr>
@@ -233,7 +315,8 @@
                     <tr>
                         <th>Username</th>
                         <th>Password</th>
-                        <th>Action</th>
+                        <th>Edit</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -242,18 +325,22 @@
                             <td><code>{{ $email->fullName }}</code></td>
                             <td><code>{{ $email->password }}</code></td>
                             <td>
+                                <a class="btn btn-primary btn-circle btn-xs"
+                                   href="/emails/{{ $email->id }}/edit">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
                                 <form id="delete-email-{{ $email->id }}" method="POST"
                                       action="/emails/{{ $email->id }}">
                                     {{ csrf_field() }}
                                     {{ method_field('delete') }}
-                                    <div class="btn-group-sm">
-                                        <a class="btn btn-primary" href="/emails/{{ $email->id }}/edit">Edit</a>
-                                        <a class="btn btn-danger" href="/emails/{{ $email->id }}"
-                                           onclick="event.preventDefault();
-                                                   del('delete-email-{{ $email->id }}')">
-                                            Delete
-                                        </a>
-                                    </div>
+
+                                    <a class="btn btn-danger btn-circle btn-xs" href="/emails/{{ $email->id }}"
+                                       onclick="event.preventDefault(); del('delete-email-{{ $email->id }}')">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </a>
+
                                 </form>
                             </td>
                         </tr>
@@ -279,8 +366,9 @@
                         <th>Name</th>
                         <th>Username</th>
                         <th>Password</th>
-                        <th>Details</th>
-                        <th>Action</th>
+                        {{--<th>Details</th>--}}
+                        <th>Edit</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -290,21 +378,24 @@
                             <td><code>{{ $webapp->name }}</code></td>
                             <td><code>{{ $webapp->username }}</code></td>
                             <td><code>{{ $webapp->password }}</code></td>
-                            <td><code>{!! nl2br($webapp->details) !!}</code></td>
+                            {{--<td><code>{!! nl2br($webapp->details) !!}</code></td>--}}
                             <td>
-
+                                <a class="btn btn-primary btn-circle btn-xs"
+                                   href="/webapps/{{ $webapp->id }}/edit">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
                                 <form id="delete-webapp-{{ $webapp->id }}" method="POST"
                                       action="/webapps/{{ $webapp->id }}">
                                     {{ csrf_field() }}
                                     {{ method_field('delete') }}
-                                    <div class="btn-group-sm">
-                                        <a class="btn btn-primary" href="/webapps/{{ $webapp->id }}/edit">Edit</a>
-                                        <a class="btn btn-danger" href="/webapps/{{ $webapp->id }}"
-                                           onclick="event.preventDefault();
-                                                   del('delete-webapp-{{ $webapp->id }}')">
-                                            Delete
-                                        </a>
-                                    </div>
+
+                                    <a class="btn btn-danger btn-circle btn-xs" href="/webapps/{{ $webapp->id }}"
+                                       onclick="event.preventDefault(); del('delete-webapp-{{ $webapp->id }}')">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </a>
+
                                 </form>
                             </td>
                         </tr>

@@ -19,7 +19,7 @@
 <body>
 <div id="app">
 
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -34,23 +34,31 @@
             </div>
 
             <div class="collapse navbar-collapse" id="top-navbar">
-                <ul class="nav navbar-nav">
-                    @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
-                    @else
+                <ul class="nav navbar-nav navbar-left">
+                    @if (Auth::check())
                         <li><a href="/domains">Domains</a></li>
                         <li><a href="/hostings">Hostings</a></li>
                         <li><a href="/maintainers">Maintainers</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Add... <span class="caret"></span></a>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-success navbar-btn dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Add <span class="caret"></span>
+                            </button>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('/domains/create') }}">Domain</a></li>
                                 <li><a href="{{ url('/hostings/create') }}">Hosting</a></li>
                                 <li><a href="{{ url('/maintainers/create') }}">Maintainer</a></li>
                             </ul>
-                        </li>
+                        </div>
+                    @endif
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Auth::guest())
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @else
                         <li><a class="nav-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
@@ -59,7 +67,6 @@
                                 {{ csrf_field() }}
                             </form>
                         </li>
-
                     @endif
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -73,10 +80,10 @@
     <footer class="footer">
         <div class="container text-center">
             <p class="text-muted">
-                <strong>Domains Control Panel</strong> by <a href="http://controlpanel.dev">Simone Basini</a>.
+                <strong>{{ config('app.name', 'Domain Panel') }}</strong> by Simone Basini.
             </p>
             <p>
-                <a class="icon" href="#">
+                <a class="icon" href="https://github.com/madcatstudio">
                     <i class="fa fa-github"></i>
                 </a>
             </p>
