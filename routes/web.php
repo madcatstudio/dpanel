@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('domains.index');
 //});
-Route::get('/', 'DomainsController@index')->name('homepage');
+Route::get('/', 'HomeController@index');
 
 Route::get('/domains', 'DomainsController@index')->name('domains');
 Route::post('/domains', 'DomainsController@store');
@@ -69,5 +69,3 @@ Route::patch('/maintainers/{maintainer}', 'MaintainersController@update');
 Route::delete('/maintainers/{maintainer}', 'MaintainersController@destroy');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
