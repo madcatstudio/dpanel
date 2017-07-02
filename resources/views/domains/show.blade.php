@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $domain->name }}</h1>
+    <h3 class="text-center">{{ $domain->name }}</h3>
     <hr>
     <div class="row">
         <div class="col-md-4">
@@ -216,10 +216,11 @@
                             @foreach($domain->subdomains as $subdomain)
                                 <tr>
                                     <td>
-                                        <code>{{ $subdomain->fullUrl }}</code> <a
-                                                href="{{ $subdomain->fullUrl }}" target="_blank"
-                                                class="btn btn-default btn-xs btn-circle"><span
-                                                    class="glyphicon glyphicon-link"></span> open link</a>
+                                        <code>{{ $subdomain->fullUrl }}</code>
+                                        {{--<a--}}
+                                                {{--href="{{ $subdomain->fullUrl }}" target="_blank"--}}
+                                                {{--class="btn btn-default btn-xs btn-circle"><span--}}
+                                                    {{--class="glyphicon glyphicon-link"></span> open link</a>--}}
                                     </td>
                                     <td>
                                         <a class="btn btn-primary btn-circle btn-xs"
