@@ -202,49 +202,50 @@
                 </div>
 
                 @if($domain->subdomains->count() > 0)
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th>Url</th>
-                            <th>Edit</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        @foreach($domain->subdomains as $subdomain)
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
                             <tr>
-                                <td>
-                                    <code>{{ $subdomain->fullUrl }}</code> <a
-                                            href="{{ $subdomain->fullUrl }}" target="_blank"
-                                            class="btn btn-default btn-xs btn-circle"><span
-                                                class="glyphicon glyphicon-link"></span> open link</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-primary btn-circle btn-xs"
-                                       href="/subdomains/{{ $subdomain->id }}/edit">
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form id="delete-subdomain-{{ $subdomain->id }}" method="POST"
-                                          action="/subdomains/{{ $subdomain->id }}">
-                                        {{ csrf_field() }}
-                                        {{ method_field('delete') }}
-
-                                        <a class="btn btn-danger btn-circle btn-xs"
-                                           href="/subdomains/{{ $subdomain->id }}"
-                                           onclick="event.preventDefault(); del('delete-subdomain-{{ $subdomain->id }}')">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        </a>
-
-                                    </form>
-                                </td>
+                                <th>Url</th>
+                                <th>Edit</th>
+                                <th></th>
                             </tr>
-                        @endforeach
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            @foreach($domain->subdomains as $subdomain)
+                                <tr>
+                                    <td>
+                                        <code>{{ $subdomain->fullUrl }}</code> <a
+                                                href="{{ $subdomain->fullUrl }}" target="_blank"
+                                                class="btn btn-default btn-xs btn-circle"><span
+                                                    class="glyphicon glyphicon-link"></span> open link</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-circle btn-xs"
+                                           href="/subdomains/{{ $subdomain->id }}/edit">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form id="delete-subdomain-{{ $subdomain->id }}" method="POST"
+                                              action="/subdomains/{{ $subdomain->id }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('delete') }}
+
+                                            <a class="btn btn-danger btn-circle btn-xs"
+                                               href="/subdomains/{{ $subdomain->id }}"
+                                               onclick="event.preventDefault(); del('delete-subdomain-{{ $subdomain->id }}')">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 @endif
             </div>
 
@@ -321,43 +322,45 @@
                 </div>
 
                 @if($domain->emails->count() > 0)
-                    <table class="table table-condensed table-responsive">
-                        <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Edit</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($domain->emails as $email)
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
                             <tr>
-                                <td><code>{{ $email->fullName }}</code></td>
-                                <td><code>{{ $email->password }}</code></td>
-                                <td>
-                                    <a class="btn btn-primary btn-circle btn-xs"
-                                       href="/emails/{{ $email->id }}/edit">
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form id="delete-email-{{ $email->id }}" method="POST"
-                                          action="/emails/{{ $email->id }}">
-                                        {{ csrf_field() }}
-                                        {{ method_field('delete') }}
-
-                                        <a class="btn btn-danger btn-circle btn-xs" href="/emails/{{ $email->id }}"
-                                           onclick="event.preventDefault(); del('delete-email-{{ $email->id }}')">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        </a>
-
-                                    </form>
-                                </td>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Edit</th>
+                                <th></th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($domain->emails as $email)
+                                <tr>
+                                    <td><code>{{ $email->fullName }}</code></td>
+                                    <td><code>{{ $email->password }}</code></td>
+                                    <td>
+                                        <a class="btn btn-primary btn-circle btn-xs"
+                                           href="/emails/{{ $email->id }}/edit">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form id="delete-email-{{ $email->id }}" method="POST"
+                                              action="/emails/{{ $email->id }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('delete') }}
+
+                                            <a class="btn btn-danger btn-circle btn-xs" href="/emails/{{ $email->id }}"
+                                               onclick="event.preventDefault(); del('delete-email-{{ $email->id }}')">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 @endif
             </div>
 
@@ -375,48 +378,51 @@
                 </div>
 
                 @if($domain->webapps->count() > 0)
-                    <table class="table table-condensed table-responsive">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            {{--<th>Details</th>--}}
-                            <th>Edit</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        @foreach($domain->webapps as $webapp)
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
                             <tr>
-                                <td><code>{{ $webapp->name }}</code></td>
-                                <td><code>{{ $webapp->username }}</code></td>
-                                <td><code>{{ $webapp->password }}</code></td>
-                                {{--<td><code>{!! nl2br($webapp->details) !!}</code></td>--}}
-                                <td>
-                                    <a class="btn btn-primary btn-circle btn-xs"
-                                       href="/webapps/{{ $webapp->id }}/edit">
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form id="delete-webapp-{{ $webapp->id }}" method="POST"
-                                          action="/webapps/{{ $webapp->id }}">
-                                        {{ csrf_field() }}
-                                        {{ method_field('delete') }}
-
-                                        <a class="btn btn-danger btn-circle btn-xs" href="/webapps/{{ $webapp->id }}"
-                                           onclick="event.preventDefault(); del('delete-webapp-{{ $webapp->id }}')">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        </a>
-
-                                    </form>
-                                </td>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                {{--<th>Details</th>--}}
+                                <th>Edit</th>
+                                <th></th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+
+                            @foreach($domain->webapps as $webapp)
+                                <tr>
+                                    <td><code>{{ $webapp->name }}</code></td>
+                                    <td><code>{{ $webapp->username }}</code></td>
+                                    <td><code>{{ $webapp->password }}</code></td>
+                                    {{--<td><code>{!! nl2br($webapp->details) !!}</code></td>--}}
+                                    <td>
+                                        <a class="btn btn-primary btn-circle btn-xs"
+                                           href="/webapps/{{ $webapp->id }}/edit">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form id="delete-webapp-{{ $webapp->id }}" method="POST"
+                                              action="/webapps/{{ $webapp->id }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('delete') }}
+
+                                            <a class="btn btn-danger btn-circle btn-xs"
+                                               href="/webapps/{{ $webapp->id }}"
+                                               onclick="event.preventDefault(); del('delete-webapp-{{ $webapp->id }}')">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 @endif
             </div>
 
