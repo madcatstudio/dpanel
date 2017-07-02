@@ -202,7 +202,7 @@
                 </div>
 
                 @if($domain->subdomains->count() > 0)
-                    <table class="table">
+                    <table class="table table-condensed table-responsive">
                         <thead>
                         <tr>
                             <th>Url</th>
@@ -262,7 +262,7 @@
                 </div>
 
                 @if($domain->databases->count() > 0)
-                    <table class="table">
+                    <table class="table table-condensed table-responsive">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -319,7 +319,7 @@
                 </div>
 
                 @if($domain->emails->count() > 0)
-                    <table class="table">
+                    <table class="table table-condensed table-responsive">
                         <thead>
                         <tr>
                             <th>Username</th>
@@ -373,7 +373,7 @@
                 </div>
 
                 @if($domain->webapps->count() > 0)
-                    <table class="table">
+                    <table class="table table-condensed table-responsive">
                         <thead>
                         <tr>
                             <th>Name</th>
