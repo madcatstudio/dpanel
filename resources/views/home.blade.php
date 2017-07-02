@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <h1>{{ \App\Domain::all()->count() }}</h1> domains found in database.
+                    <h1>{{ \App\Domain::all()->count() }}</h1> <a href="{{ url('/domains') }}">domains</a> found in database.
                 </div>
                 <div class="panel-footer">
                     <a href="{{ url('/domains/create') }}" class="btn btn-success btn-block">Add a domain</a>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <h1>{{ \App\Hosting::all()->count() }}</h1> hostings found in database.
+                    <h1>{{ \App\Hosting::all()->count() }}</h1> <a href="{{ url('/hostings') }}">hostings</a> found in database.
                 </div>
                 <div class="panel-footer">
                     <a href="{{ url('/hostings/create') }}" class="btn btn-success btn-block">Add a hosting</a>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <h1>{{ \App\Maintainer::all()->count() }}</h1> maintainers found in database.
+                    <h1>{{ \App\Maintainer::all()->count() }}</h1> <a href="{{ url('/maintainers') }}">maintainers</a> found in database.
                 </div>
                 <div class="panel-footer">
                     <a href="{{ url('/maintainers/create') }}" class="btn btn-success btn-block">Add a maintainer</a>
