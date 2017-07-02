@@ -191,10 +191,18 @@
         <div class="col-md-8">
 
             {{--SUBDOMAIN--}}
-            <h3>Subdomains</h3>
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Subdomains</h3>
+                    <div class="btn-group-sm pull-right">
+                        <a class="btn btn-success" href="/domains/{{ $domain->id }}/subdomains/create"><span
+                                    class="glyphicon glyphicon-plus"></span> Add
+                            Subdomain</a>
+                    </div>
+                </div>
 
                 @if($domain->subdomains->count() > 0)
-                    <table class="table table-condensed table-responsive">
+                    <table class="table table-condensed">
                         <thead>
                         <tr>
                             <th>Url</th>
@@ -238,55 +246,66 @@
                         </tbody>
                     </table>
                 @endif
-
+            </div>
 
             <hr>
 
             {{--DATABASE--}}
-            <h3>Databases</h3>
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Databases</h3>
+                    <div class="btn-group-sm pull-right">
+                        <a class="btn btn-success" href="/domains/{{ $domain->id }}/databases/create"><span
+                                    class="glyphicon glyphicon-plus"></span> Add
+                            Database</a>
+                    </div>
+                </div>
 
                 @if($domain->databases->count() > 0)
-                    <table class="table table-condensed table-responsive">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Edit</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($domain->databases as $database)
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
                             <tr>
-                                <td><code>{{ $database->name }}</code></td>
-                                <td><code>{{ $database->username }}</code></td>
-                                <td><code>{{ $database->password }}</code></td>
-                                <td>
-                                    <a class="btn btn-primary btn-circle btn-xs"
-                                       href="/databases/{{ $database->id }}/edit">
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form id="delete-database-{{ $database->id }}" method="POST"
-                                          action="/databases/{{ $database->id }}">
-                                        {{ csrf_field() }}
-                                        {{ method_field('delete') }}
-
-                                        <a class="btn btn-danger btn-circle btn-xs"
-                                           href="/databases/{{ $database->id }}"
-                                           onclick="event.preventDefault(); del('delete-database-{{ $database->id }}')">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        </a>
-
-                                    </form>
-                                </td>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Edit</th>
+                                <th></th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($domain->databases as $database)
+                                <tr>
+                                    <td><code>{{ $database->name }}</code></td>
+                                    <td><code>{{ $database->username }}</code></td>
+                                    <td><code>{{ $database->password }}</code></td>
+                                    <td>
+                                        <a class="btn btn-primary btn-circle btn-xs"
+                                           href="/databases/{{ $database->id }}/edit">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form id="delete-database-{{ $database->id }}" method="POST"
+                                              action="/databases/{{ $database->id }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('delete') }}
+
+                                            <a class="btn btn-danger btn-circle btn-xs"
+                                               href="/databases/{{ $database->id }}"
+                                               onclick="event.preventDefault(); del('delete-database-{{ $database->id }}')">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </a>
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 @endif
+            </div>
 
             <hr>
 
