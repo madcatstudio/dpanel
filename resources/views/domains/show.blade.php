@@ -191,15 +191,7 @@
         <div class="col-md-8">
 
             {{--SUBDOMAIN--}}
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Subdomains</h3>
-                    <div class="btn-group-sm pull-right">
-                        <a class="btn btn-success" href="/domains/{{ $domain->id }}/subdomains/create"><span
-                                    class="glyphicon glyphicon-plus"></span> Add
-                            Subdomain</a>
-                    </div>
-                </div>
+            <h3>Subdomains</h3>
 
                 @if($domain->subdomains->count() > 0)
                     <table class="table table-condensed table-responsive">
@@ -246,20 +238,12 @@
                         </tbody>
                     </table>
                 @endif
-            </div>
+
 
             <hr>
 
             {{--DATABASE--}}
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
-                    <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Databases</h3>
-                    <div class="btn-group-sm pull-right">
-                        <a class="btn btn-success" href="/domains/{{ $domain->id }}/databases/create"><span
-                                    class="glyphicon glyphicon-plus"></span> Add
-                            Database</a>
-                    </div>
-                </div>
+            <h3>Databases</h3>
 
                 @if($domain->databases->count() > 0)
                     <table class="table table-condensed table-responsive">
@@ -303,7 +287,6 @@
                         </tbody>
                     </table>
                 @endif
-            </div>
 
             <hr>
 
