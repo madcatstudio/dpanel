@@ -47,7 +47,7 @@
                                 Add <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('/domains/create') }}">Domain</a></li>
+                                <li><a href="{{ url('/domains/create') }}">Domains</a></li>
                                 <li><a href="{{ url('/hostings/create') }}">Hosting</a></li>
                                 <li><a href="{{ url('/maintainers/create') }}">Maintainer</a></li>
                             </ul>
