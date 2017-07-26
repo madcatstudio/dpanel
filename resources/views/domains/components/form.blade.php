@@ -14,7 +14,7 @@
     </div>
 
     <div class="col-md-4 form-group {{ $errors->has('registration_date') ? ' has-error' : '' }}">
-        <label class="control-label" for="registration_date">Registration date *</label>
+        <label class="control-label" for="registration_date">Registration date  *</label>
 
         <input id="registration_date" type="date"
                class="form-control"
