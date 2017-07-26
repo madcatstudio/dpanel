@@ -40,18 +40,14 @@
                         <li><a href="/hostings">Hostings</a></li>
                         <li><a href="/maintainers">Maintainers</a></li>
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-success navbar-btn dropdown-toggle"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Add <span class="caret"></span>
-                            </button>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('/domains/create') }}">Domains</a></li>
+                                <li><a href="{{ url('/domains/create') }}">Domain</a></li>
                                 <li><a href="{{ url('/hostings/create') }}">Hosting</a></li>
                                 <li><a href="{{ url('/maintainers/create') }}">Maintainer</a></li>
                             </ul>
-                        </div>
+                        </li>
                     @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
